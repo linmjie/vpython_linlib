@@ -7,12 +7,12 @@ class Temperature:
         if len(tempArg) != 1:
             raise ValueError('Provide exactly one temperature argument: kelvin, celsius, or fahrenheit')
         name, value = next(iter(tempArg.items()))
-        match name:
-            case 'kelvin' | 'k' | 'K':
+        match name.capitalize():
+            case 'Kelvin' | 'K':
                 self.kelvin = value
-            case 'celsius' | 'c' | 'C':
+            case 'Celsius' | 'C':
                 self.kelvin = value + 273.15
-            case 'fahrenheit' | 'f' | 'F':
+            case 'Fahrenheit' | 'F':
                 self.kelvin = (value - 32) * 5/9 + 273.15
             case _:
                 raise ValueError(f'Unknown temperature unit "{name}". Use kelvin, celsius, or fahrenheit')
@@ -25,14 +25,31 @@ class Temperature:
     def fahrenheit(self) -> float:
         return (self.kelvin - 273.15) * 9/5 + 32
 
+    def __str__(self):
+        return f'Temperature in kelvin: {self.kelvin}, celcius: {self.celsius}, fahrenheit: {self.fahrenheit}'
+
+    def __add__(self, other):
+        if isinstance(other, Temperature):
+            return Temperature(kelvin=self.kelvin + other.kelvin)
+        if isinstance(other, (float, int)):
+            return Temperature(kelvin=self.kelvin + other)
+        return NotImplemented
+
+    def __sub__(self, other):
+        if isinstance(other, Temperature):
+            return Temperature(kelvin=self.kelvin - other.kelvin)
+        if isinstance(other, (float, int)):
+            return Temperature(kelvin=self.kelvin - other)
+        return NotImplemented
+
 @dataclass(frozen=True)
 class AtmosphereLevel:
-    kelvin: float
+    temperature: Temperature 
     altitude: float
     # add more
 
     def __post_init__(self):
-        if self.kelvin < 0:
+        if self.temperature.kelvin < 0:
             raise ValueError('Temperature in kelvin cannot be negative')
 
 class _MetaAtmosphereLevelsIter(type):
@@ -48,11 +65,11 @@ class _MetaAtmosphereLevelsIter(type):
 
 # All values for atmosphere levels are measured from the bottom
 class AtmosphereLevels(metaclass=_MetaAtmosphereLevelsIter):
-    EXOSPHERE: AtmosphereLevel = AtmosphereLevel(kelvin=2270, altitude=700)
-    THERMOSPHERE: AtmosphereLevel = AtmosphereLevel(kelvin=195, altitude=80)
-    MESOSPHERE: AtmosphereLevel = AtmosphereLevel(kelvin=270, altitude=50)
-    STRATOSPHERE: AtmosphereLevel = AtmosphereLevel(kelvin=210, altitude=15)
-    TROPOSPHERE: AtmosphereLevel = AtmosphereLevel(kelvin=300, altitude=0)
+    EXOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=2270), altitude=700)
+    THERMOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=195), altitude=80)
+    MESOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=270), altitude=50)
+    STRATOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=210), altitude=15)
+    TROPOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=300), altitude=0)
 
     @staticmethod
     def getGradiant(altitude: float) -> AtmosphereLevel:
