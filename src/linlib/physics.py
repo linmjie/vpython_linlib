@@ -1,4 +1,17 @@
 from dataclasses import dataclass, fields
+from vpython import vec, vector
+
+G: float = 6.6743 * (10**-11)
+
+def centerVector(pos: vector, vec: vector, center: vector) -> vector:
+    ...
+
+def getGravitationalAcceleration(mass: float, radius: float):
+    return G * mass / radius**2
+
+def getDragForce(density: float, velocity: float, dragCoefficient: float, crossSectionalArea: float):
+    assert dragCoefficient >= -0.05 and dragCoefficient <= 1.05 # a little leway
+    return 0.5 * density * velocity**2 * dragCoefficient * crossSectionalArea
 
 class Temperature:
     kelvin: float
@@ -45,8 +58,8 @@ class Temperature:
 @dataclass(frozen=True)
 class AtmosphereLevel:
     temperature: Temperature 
+    density: float # kg/m^3
     altitude: float
-    # add more
 
     def __post_init__(self):
         if self.temperature.kelvin < 0:
@@ -65,11 +78,11 @@ class _MetaAtmosphereLevelsIter(type):
 
 # All values for atmosphere levels are measured from the bottom
 class AtmosphereLevels(metaclass=_MetaAtmosphereLevelsIter):
-    EXOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=2270), altitude=700)
-    THERMOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=195), altitude=80)
-    MESOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=270), altitude=50)
-    STRATOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=210), altitude=15)
-    TROPOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=300), altitude=0)
+    EXOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=2270), density=10**-10, altitude=700)
+    THERMOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=195), density=0.000008, altitude=80)
+    MESOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=270), density=0.001, altitude=50)
+    STRATOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=210), density=0.364, altitude=15)
+    TROPOSPHERE: AtmosphereLevel = AtmosphereLevel(Temperature(k=300), density=1.225, altitude=0)
 
     @staticmethod
     def getGradiant(altitude: float) -> AtmosphereLevel:
