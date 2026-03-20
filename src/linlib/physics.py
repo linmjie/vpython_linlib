@@ -1,10 +1,10 @@
 from dataclasses import dataclass, fields
-from vpython import vec, vector
+from vpython import vector
 
 G: float = 6.6743 * (10**-11)
 
-def centerVector(pos: vector, vec: vector, center: vector) -> vector:
-    ...
+def centerVector(pos: vector, center: vector) -> vector:
+    return (pos - center).norm()
 
 def getGravitationalAcceleration(mass: float, radius: float):
     return G * mass / radius**2
