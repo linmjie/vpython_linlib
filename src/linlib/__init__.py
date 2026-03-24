@@ -1,5 +1,7 @@
 from .math_plus import ln, csc, sec, cot # no star import to avoid name conflicts
-from .physics import *
+from .physics.atmosphere import *
+from .physics import force
+from .physics.temperature import Temperature
 from .prompting import *
 
 from vpython import * #pyright: ignore
@@ -9,7 +11,6 @@ from .key_input import *
 
 # clean up namespace
 del math_plus
-del physics
 del prompting
 del vpython
 del axis
