@@ -8,11 +8,13 @@ from vpython import * #pyright: ignore
 from .memory import *
 from .axis import *
 from .key_input import *
+from .mainloop import activateMain
 
 # clean up namespace
 del math_plus
+del physics
 del prompting
-del vpython
+# del vpython
 del axis
 del key_input
 del memory

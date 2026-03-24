@@ -1,5 +1,5 @@
 from dataclasses import dataclass, fields
-from temperature import Temperature
+from .temperature import Temperature
 
 @dataclass(frozen=True)
 class AtmosphereLevel:
