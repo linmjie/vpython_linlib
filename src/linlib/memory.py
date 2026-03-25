@@ -3,6 +3,7 @@ import weakref as wf
 
 def delete(obj: vp.standardAttributes):
     obj.visible = False
+    # implement deletion from registers later
     del obj
 
 # Python is garbage collected and this is not a real defer

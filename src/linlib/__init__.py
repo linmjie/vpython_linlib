@@ -9,6 +9,7 @@ from .memory import *
 from .axis import *
 from .key_input import *
 from .mainloop import activateMain
+from .vector_util import *
 
 # clean up namespace
 del math_plus

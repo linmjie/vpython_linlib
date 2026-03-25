@@ -41,6 +41,7 @@ class MassObject():
 _gravMassObjectRegistry: set[MassObject] = set()
 
 def _gravityCycle(rate: int):
+    dt: float = 1 / rate
     for obj in _gravMassObjectRegistry:
         obj.accel = Axis.ZERO
         for secondObj in _gravMassObjectRegistry:
@@ -49,8 +50,8 @@ def _gravityCycle(rate: int):
                 direction: vector = centerVector(obj.pos, secondObj.pos)
                 accel: vector = accelMag * direction
                 obj.accel += accel
-                obj.vel += obj.accel / rate
-                obj.pos += obj.vel / rate
+                obj.vel += obj.accel * dt
+                obj.pos += obj.vel * dt
 
 def registerMassObject(obj: vp.standardAttributes, mass: float) -> MassObject:
     zero = vector(0, 0, 0)
