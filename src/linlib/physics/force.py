@@ -1,9 +1,14 @@
 from dataclasses import dataclass
-from typing import Final, Self
+from typing import Final
 from vpython import vector
 import vpython as vp
+from ..axis import Axis
 
-G: float = 6.6743 * (10**-11)
+from linlib.axis import Axis
+
+G: float = 6.6743 * (10**-11) # m^3/kgs^2
+EPSILON_NAUGHT: float = 8.854 * (10**-12) # C^2/Nm^2
+K: float = 8.98755 * (10**9) # Nm^2/C^2
 
 @dataclass
 class MassObject():
@@ -37,10 +42,12 @@ _gravMassObjectRegistry: set[MassObject] = set()
 
 def _gravityCycle(rate: int):
     for obj in _gravMassObjectRegistry:
+        obj.accel = Axis.ZERO
         for secondObj in _gravMassObjectRegistry:
             if obj != secondObj:
-                accelMag = getGravitationalAcceleration(secondObj.mass, obj.mass, (obj.pos - secondObj.pos).mag)
-                accel = accelMag * centerVector(obj.pos, secondObj.pos)
+                accelMag: float = getGravitationalAcceleration(secondObj.mass, (obj.pos - secondObj.pos).mag)
+                direction: vector = centerVector(obj.pos, secondObj.pos)
+                accel: vector = accelMag * direction
                 obj.accel += accel
                 obj.vel += obj.accel / rate
                 obj.pos += obj.vel / rate
@@ -52,11 +59,11 @@ def registerMassObject(obj: vp.standardAttributes, mass: float) -> MassObject:
     return massObj
 
 def centerVector(pos: vector, center: vector) -> vector:
-    return (pos - center).norm()
+    return (center - pos).norm()
 
-def getGravitationalAcceleration(M: float, mass2: float, radius: float):
+def getGravitationalAcceleration(mass: float, radius: float):
     if radius != 0:
-        return G * M * mass2 / radius**2
+        return G * mass / radius**2
     return 0
 
 def getDragForce(density: float, velocity: float, dragCoefficient: float, crossSectionalArea: float):
