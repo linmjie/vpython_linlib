@@ -19,3 +19,6 @@ class vec3(vp.vector):
         if color is None:
             color = vp.color.red
         return vp.arrow(pos=origin, axis=self, color=color, shaftwidth=0.5, emissive=True)
+    
+    def distanceFrom(self, other: vp.vector) -> float:
+        return (self - other).mag
