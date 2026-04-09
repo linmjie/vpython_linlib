@@ -3,6 +3,7 @@ from .physics.atmosphere import *
 from .physics import force
 from .physics.temperature import Temperature
 from .algorithm.randomList import randomList
+from .countmap import CountMap
 from .prompting import *
 
 from vpython import * #pyright: ignore
@@ -16,7 +17,6 @@ from .vector_util import *
 del math_plus
 del physics
 del prompting
-del random
 # del vpython
 del axis
 del key_input
