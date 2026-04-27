@@ -8,13 +8,14 @@
 ## Using miniconda virtual environments
 Miniconda is my preferred virtual environment manager, this guide will teach you the very basics of using it. For more comprehensive documentation, see the [official anaconda guide](https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial)
 - Install miniconda on [Windows](#windows-installation), [macOS](#macos-installation), or [Linux](linux-installation)
+  - You can use the [website](https://www.anaconda.com/docs/getting-started/miniconda/install/overview) if you don't like package managers
 - Make sure you ran the proper conda init command, otherwise you will not be able to create and use virtual environments
 - You can run 'conda' or 'conda --help' in your terminal to get a list of conda commands
 - Create a virtual environment with conda create, placing the name of your virtual environment after the -n flag
 ```shell
 conda create -n MY_ENVIRONMENT_NAME
 ```
-- Any arguments after will automatically be installed into that environment
+- Any arguments after will automatically be installed as Python modules into that environment
 ```shell
 conda create -n ENVIRONMENT_WITH_SOME_LIBRARIES module1 module2 module3
 ```
@@ -40,7 +41,7 @@ conda deactivate
 
 <!--TOC-->
 ## Windows installation
-- Install Window's package manager, [Scoop](https://scoop.sh/)(make sure you run this in Powershell, not terminal, switch to your terminal once you downloaded Scoop)
+- Install Window's package manager, [Scoop](https://scoop.sh/) (make sure you run this in Powershell, not terminal. Switch to your terminal once you've downloaded Scoop)
 - Install git via Scoop for repository cloning for buckets
 ```powershell
 scoop install git
@@ -61,8 +62,8 @@ conda init powershell
 
 <!--TOC-->
 ## macOS installation
-- Install macOS's package manager, [HomeBrew](https://brew.sh/). [MacPorts](https://www.macports.org/install.php) may work better on Intel Macs
-- Install miniconda via homebrew
+- Install macOS's package manager, [HomeBrew](https://brew.sh/).
+- Install miniconda via HomeBrew:
 ```shell
 brew install --cask miniconda
 ```
@@ -79,12 +80,16 @@ conda init zsh
 
 <!--TOC-->
 ## Linux installation
-- Install miniconda, either following the [website](https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install)'s instructions, or installing via your favorite package manager (package is typically called miniconda3)
+- Install miniconda, either following the [website](https://www.anaconda.com/docs/getting-started/miniconda/install/linux-install)'s instructions, or installing via your favorite package manager (package is typically called miniconda3 or miniconda)
 - Activate miniconda in your terminal by running this command:
 ```shell
 conda init bash
 ```
 - If you use zshell, just replace bash with zsh
+  - You can check which shell your terminal runs via this command:
+    ```shell
+    which $SHELL
+    ```
 - Restart your terminal after, miniconda will now work for future terminal sessions
 <!--TOC-->
 ## Installing this library
