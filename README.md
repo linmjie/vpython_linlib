@@ -7,7 +7,7 @@
 <!--TOC-->
 ## Using miniconda virtual environments
 Miniconda is my preferred virtual environment manager, this guide will teach you the very basics of using it. For more comprehensive documentation, see the [official anaconda guide](https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial)
-- Install miniconda on [Windows](#windows-installation), [macOS](#macos-installation), or [Linux](linux-installation)
+- Install miniconda on [Windows](#windows-installation), [macOS](#macos-installation), or [Linux](#linux-installation)
   - You can use the [website](https://www.anaconda.com/docs/getting-started/miniconda/install/overview) if you don't like package managers
 - Make sure you ran the proper conda init command, otherwise you will not be able to create and use virtual environments
 - You can run 'conda' or 'conda --help' in your terminal to get a list of conda commands
