@@ -1,7 +1,7 @@
 <!--TOC-->
 # Installation
 - You should always use virtual environments when dealing with Python modules
-- [Here](https://github.com/linmjie/vpython_linlib/MINICONDA.md) are instructions for you to start using these virtual environments
+- [Here](MINICONDA.md) are instructions for you to start using these virtual environments
 - If you don't care about this, you can skip to the local installation for this Python module [here](#installing-this-library)
 
 Cloning the repo:
