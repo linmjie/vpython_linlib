@@ -14,7 +14,7 @@ conda create -n MY_ENVIRONMENT_NAME
 conda create -n ENVIRONMENT_WITH_SOME_LIBRARIES module1 module2 module3
 ```
 - Here's some example environments you can use
-  - Virtual environment for vpython:
+  - Virtual environment for vpython (this doesn't work lol. vpython can't be directly installed from conda, use pip install vpython while your virtual environment is active)
     ```shell
     conda create -n vpython vpython
     ```
