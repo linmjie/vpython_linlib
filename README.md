@@ -2,7 +2,10 @@
 # Installation
 - You should always use virtual environments when dealing with Python modules
 - [Here](MINICONDA.md) are instructions for you to start using these virtual environments
-- If you don't care about this, you can skip to the local installation for this Python module [here](#installing-this-library)
+
+<!--TOC-->
+## Installing this library
+<p>This is supposed to work with vpython, make sure your environment has vpython installed</p>
 
 Cloning the repo:
 ```

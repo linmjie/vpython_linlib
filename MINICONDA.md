@@ -85,6 +85,3 @@ conda init bash
     which $SHELL
     ```
 - Restart your terminal after, miniconda will now work for future terminal sessions
-<!--TOC-->
-## Installing this library
-<p>This is supposed to work with vpython, make sure your environment has vpython installed</p>
